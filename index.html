@@ -8,6 +8,8 @@
     <body>
         <div id="shopping-list">
             <h1>{{ header.toLocaleUpperCase() }}</h1>
+            <input v-model="newItem" type="text" placeholder="Add an item">
+            <button class="btn btn-primary" v-on:click="items.push(newItem)">Save Item</button>
             <ul>
                 <li v-for="item in items">{{ item }}</li>
             </ul>
@@ -18,6 +20,7 @@
                 el: '#shopping-list',
                 data: {
                     header: 'shopping list app',
+                    newItem: '',
                     items: [
                         '10 party hats',
                         '2 board game',
