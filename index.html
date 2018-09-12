@@ -14,11 +14,10 @@
             </div>
             <div v-if="state === 'edit'" class="add-item-form">
                 <input v-model="newItem" type="text" placeholder="Add an item" @keyup.enter="saveItem">
-                <p> {{ characterCount }}/200</p>
                 <button class="btn btn-primary" v-bind:disabled="newItem.length === 0" @click="saveItem">Save Item</button>
             </div>
             <ul>
-                <li v-for="item in items" :class="{strikeout: item.purchased}" @click="togglePurchased(item)">{{ item.label }}</li>
+                <li v-for="item in reversedItems" :class="{strikeout: item.purchased}" @click="togglePurchased(item)">{{ item.label }}</li>
             </ul>
             <p v-if="items.length === 0">Nice job! You've bought all your items.</p>
         </div>
@@ -49,8 +48,8 @@
                     ]
                 },
                 computed:{
-                    characterCount(){
-                        return this.newItem.length;
+                    reversedItems(){
+                        return this.items.slice(0).reverse();
                     }
                 },
                 methods: {
